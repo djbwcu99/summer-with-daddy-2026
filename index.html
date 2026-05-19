@@ -176,13 +176,16 @@ header .subtitle {
 
   <h3>Add Event</h3>
 
-  <input id="date" type="date" />
+<label>Start Date</label>
+<input id="startDate" type="date" />
 
-  <input id="event" type="text" placeholder="Event name" />
+<label>End Date (optional)</label>
+<input id="endDate" type="date" />
 
-  <input id="emoji" type="text" placeholder="Emoji (🎉)" maxlength="2" />
+<input id="event" type="text" placeholder="Event name" />
+<input id="emoji" type="text" placeholder="Emoji (🌊)" maxlength="2" />
 
-  <button onclick="addEvent()">Add Event</button>
+<button onclick="addEvent()">Add Event</button>
 
   <hr />
 
@@ -240,7 +243,6 @@ loadEvents();
 <script>
 const API_URL = "https://sheetdb.io/api/v1/wsm9d4yrb5d23";
 
-// Load events
 async function loadEvents() {
   const res = await fetch(API_URL);
   const data = await res.json();
@@ -257,43 +259,57 @@ async function loadEvents() {
     div.style.borderRadius = "12px";
     div.style.boxShadow = "0 2px 6px rgba(0,0,0,0.08)";
 
+    const range =
+      item.startDate === item.endDate || !item.endDate
+        ? item.startDate
+        : `${item.startDate} → ${item.endDate}`;
+
     div.innerHTML = `
-      <strong>${item.Date || item.date}</strong><br>
-      ${item.Emoji || item.emoji || ""} ${item.Event || item.event}
+      <strong>${range}</strong><br>
+      ${item.emoji || ""} ${item.event}
     `;
 
     container.appendChild(div);
   });
 }
 
-// Add event (NEW)
 async function addEvent() {
-  const date = document.getElementById("date").value;
+  const startDate = document.getElementById("startDate").value;
+  const endDate = document.getElementById("endDate").value;
   const event = document.getElementById("event").value;
   const emoji = document.getElementById("emoji").value;
 
-  if (!date || !event) {
-    alert("Please enter date and event");
+  if (!startDate || !event) {
+    alert("Start date + event required");
     return;
   }
 
-  await fetch(API_URL, {
+  const payload = {
+    data: [
+      {
+        startDate,
+        endDate: endDate || startDate,
+        event,
+        emoji
+      }
+    ]
+  };
+
+  const res = await fetch(API_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({
-      data: [
-        {
-          Date: date,
-          Event: event,
-          Emoji: emoji
-        }
-      ]
-    })
+    body: JSON.stringify(payload)
   });
 
-  document.getElementById("date").value = "";
+  if (!res.ok) {
+    alert("Failed to add event (check SheetDB POST permissions)");
+    return;
+  }
+
+  document.getElementById("startDate").value = "";
+  document.getElementById("endDate").value = "";
   document.getElementById("event").value = "";
   document.getElementById("emoji").value = "";
 
