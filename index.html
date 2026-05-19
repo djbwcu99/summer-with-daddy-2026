@@ -199,6 +199,22 @@ header .subtitle {
 <script>
 const API_URL = "https://sheetdb.io/api/v1/wsm9d4yrb5d23";
 
+
+  
+  async function deleteEvent(id) {
+
+  await fetch(`${API_URL}/id/${id}`, {
+
+    method: "DELETE"
+
+  });
+
+  loadEvents();
+
+}
+
+  
+  
 async function loadEvents() {
   try {
     const res = await fetch(API_URL);
