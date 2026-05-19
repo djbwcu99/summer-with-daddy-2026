@@ -1,9 +1,98 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Test Calendar</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Summer With Daddy 2026</title>
+<style>
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  background: #f4f6fb;
+  color: #222;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: linear-gradient(90deg, #ffb347, #ff5e62);
+  color: white;
+  padding: 16px;
+  text-align: center;
+}
+
+header h1 { margin: 0; font-size: 18px; }
+header .subtitle { font-size: 13px; opacity: 0.9; }
+
+.container { padding: 10px; max-width: 900px; margin: auto; }
+
+.month { margin-bottom: 26px; }
+
+.month h2 { font-size: 16px; margin: 10px 0; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.day {
+  background: white;
+  border-radius: 10px;
+  min-height: 70px;
+  padding: 6px;
+  font-size: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.day.header {
+  background: transparent;
+  font-weight: bold;
+  text-align: center;
+  min-height: auto;
+  box-shadow: none;
+  font-size: 10px;
+}
+
+.event {
+  display: block;
+  margin-top: 4px;
+  background: #fff1b8;
+  padding: 2px 4px;
+  border-radius: 6px;
+  font-size: 9px;
+}
+
+@media (max-width: 600px) {
+  header h1 { font-size: 15px; }
+  .day { min-height: 60px; }
+}
+</style>
 </head>
 <body>
-  <h1>It Works 🎉</h1>
+
+<header>
+  <h1>☀️ Summer With Daddy 2026 ☀️</h1>
+  <div class="subtitle">Schedule of events</div>
+</header>
+
+<div class="container">
+
+<!-- JUNE -->
+<div class="month">
+  <h2>🌞 June 2026</h2>
+  <div class="grid">
+    <div class="day header">Sun</div><div class="day header">😎 Mon</div><div class="day header">Tue</div><div class="day header">🏖️ Wed</div><div class="day header">Thu</div><div class="day header">Fri</div><div class="day header">🥾 Sat</div>
+
+    <div class="day"></div><div class="day"></div><div class="day"><span class="event">Braves ⚾🧢</span></div><div class="day"><span class="event">Braves ⚾🧢</span></div><div class="day"></div><div class="day"></div><div class="day"></div>
+    <div class="day"></div><div class="day"><span class="event">Trina 🎉</span></div><div class="day"></div><div class="day"><span class="event">Papaw 🎂</span></div><div class="day"></div><div class="day"></div><div class="day"></div>
+    <div class="day"><span class="event">FHC ⚔️</span></div><div class="day"><span class="event">NMB 🏖️</span></div><div class="day"></div><div class="day"></div><div class="day"></div><div class="day"></div><div class="day"><span class="event">Chris 🎸</span></div>
+    <div class="day"><span class="event">Beach 🌊</span></div><div class="day"><span class="event">Beach 🌊</span></div><div class="day"><span class="event">Beach 🌊</span></div><div class="day"></div><div class="day"></div><div class="day"></div><div class="day"></div>
+  </div>
+</div>
+
+</div>
+
 </body>
 </html>
