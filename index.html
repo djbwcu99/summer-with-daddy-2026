@@ -25,65 +25,107 @@ header {
 
 header h1 {
   margin: 0;
-  font-size: 18px;
+  font-size: 22px;
 }
 
-header .subtitle {
-  font-size: 13px;
+.subtitle {
+  font-size: 14px;
   opacity: 0.9;
 }
 
 .container {
-  padding: 10px;
-  max-width: 900px;
+  max-width: 1100px;
   margin: auto;
+  padding: 12px;
 }
 
-.month {
-  margin-bottom: 26px;
+.form-box {
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
-.month h2 {
-  font-size: 16px;
-  margin: 10px 0;
+.form-box h3 {
+  margin-top: 0;
 }
 
-.grid {
+input, button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+button {
+  background: #ff5e62;
+  color: white;
+  border: none;
+  font-weight: bold;
+}
+
+.calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
+  gap: 6px;
+  margin-bottom: 30px;
 }
 
-.day {
-  background: white;
-  border-radius: 10px;
-  min-height: 70px;
-  padding: 6px;
-  font-size: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-}
-
-.day.header {
-  background: transparent;
-  font-weight: bold;
+.weekday {
   text-align: center;
-  min-height: auto;
-  box-shadow: none;
-  font-size: 10px;
+  font-weight: bold;
+  padding: 8px;
 }
 
-.event {
-  display: block;
-  margin-top: 4px;
+.day-cell {
+  background: white;
+  border-radius: 12px;
+  min-height: 95px;
+  padding: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  font-size: 12px;
+}
+
+.day-number {
+  font-weight: bold;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.event-pill {
   background: #fff1b8;
-  padding: 2px 4px;
-  border-radius: 6px;
-  font-size: 9px;
+  border-radius: 8px;
+  padding: 4px 6px;
+  margin-top: 4px;
+  font-size: 11px;
 }
 
-@media (max-width: 600px) {
-  header h1 { font-size: 15px; }
-  .day { min-height: 60px; }
+.month-title {
+  margin: 24px 0 12px;
+}
+
+@media (max-width: 700px) {
+  .calendar-grid {
+    gap: 4px;
+  }
+
+  .day-cell {
+    min-height: 75px;
+    font-size: 10px;
+    padding: 5px;
+  }
+
+  .event-pill {
+    font-size: 9px;
+  }
+
+  .day-number {
+    font-size: 12px;
+  }
 }
 </style>
 </head>
@@ -96,213 +138,111 @@ header .subtitle {
 </header>
 
 <div class="container">
-  
-<!-- JUNE -->
-<div class="month">
-  <h2>🌞 June 2026</h2>
-  <div class="grid">
-    <div class="day header">Sun</div>
-    <div class="day header">Mon 😎</div>
-    <div class="day header">Tue</div>
-    <div class="day header">Wed 🏖️</div>
-    <div class="day header">Thu</div>
-    <div class="day header">Fri</div>
-    <div class="day header">Sat 🥾</div>
 
-    <div class="day"></div><div class="day"></div><div class="day"><span class="event">Braves ⚾🧢</span></div><div class="day"><span class="event">Braves ⚾🧢</span></div><div class="day"></div><div class="day"></div><div class="day"></div>
+  <div class="form-box">
+    <h3>Add Event</h3>
 
-    <div class="day"></div><div class="day"><span class="event">Trina 🎉</span></div><div class="day"></div><div class="day"><span class="event">Papaw 🎂</span></div><div class="day"></div><div class="day"></div><div class="day"></div>
+    <label>Start Date</label>
+    <input id="startDate" type="date" />
 
-    <div class="day"><span class="event">FHC ⚔️</span></div><div class="day"><span class="event">NMB 🏖️</span></div><div class="day"></div><div class="day"></div><div class="day"></div><div class="day"></div><div class="day"><span class="event">Chris 🎸 (6PM)</span></div>
+    <label>End Date (optional)</label>
+    <input id="endDate" type="date" />
 
-    <div class="day"></div><div class="day"></div><div class="day"></div><div class="day"><span class="event">Beach 🌊☀️</span></div><div class="day"><span class="event">Beach 🌊☀️</span></div><div class="day"><span class="event">Beach 🌊☀️</span></div><div class="day"></div>
+    <input id="event" type="text" placeholder="Event name" />
+
+    <input id="emoji" type="text" placeholder="Emoji 🌊" maxlength="2" />
+
+    <button onclick="addEvent()">Add Event</button>
   </div>
-</div>
 
-<!-- JULY -->
-<div class="month">
-  <h2>🇺🇸 July 2026</h2>
-  <div class="grid">
-    <div class="day header">Sun</div>
-    <div class="day header">Mon 😎</div>
-    <div class="day header">Tue</div>
-    <div class="day header">Wed 🏖️</div>
-    <div class="day header">Thu</div>
-    <div class="day header">Fri</div>
-    <div class="day header">Sat 🥾</div>
+  <h2 class="month-title">🌞 June 2026</h2>
+  <div id="june" class="calendar-grid"></div>
 
-    <div class="day"></div><div class="day"></div><div class="day"></div><div class="day"><span class="event">Beach 🌊</span></div><div class="day"></div><div class="day"></div><div class="day"></div>
+  <h2 class="month-title">🇺🇸 July 2026</h2>
+  <div id="july" class="calendar-grid"></div>
 
-    <div class="day"></div>
-    <div class="day"><span class="event">Cabins 🏕️🔥</span></div>
-    <div class="day"><span class="event">Cabins 🏕️🔥</span></div>
-    <div class="day"><span class="event">Cabins 🏕️🔥</span></div>
-    <div class="day"><span class="event">Cabins 🏕️🔥</span></div>
-    <div class="day"><span class="event">Cabins 🏕️🔥</span></div>
-    <div class="day"><span class="event">Cabins 🏕️🔥</span></div>
-
-    <div class="day"></div><div class="day"></div><div class="day"><span class="event">Train 🚂🎶</span></div><div class="day"></div><div class="day"></div><div class="day"></div><div class="day"></div>
-
-    <div class="day"></div><div class="day"></div><div class="day"></div><div class="day"></div><div class="day"></div><div class="day"></div><div class="day"></div>
-  </div>
-</div>
-
-<!-- AUGUST -->
-<div class="month">
-  <h2>🌴 August 2026</h2>
-  <div class="grid">
-    <div class="day header">Sun</div>
-    <div class="day header">Mon 😎</div>
-    <div class="day header">Tue</div>
-    <div class="day header">Wed 🏖️</div>
-    <div class="day header">Thu</div>
-    <div class="day header">Fri</div>
-    <div class="day header">Sat 🥾</div>
-
-    <div class="day"><span class="event">Hilton Head 🌴🐚</span></div>
-    <div class="day"><span class="event">Hilton Head 🌴🐚</span></div>
-    <div class="day"><span class="event">Hilton Head 🌴🐚</span></div>
-    <div class="day"><span class="event">Hilton Head 🌴🐚</span></div>
-    <div class="day"><span class="event">Hilton Head 🌴🐚</span></div>
-    <div class="day"><span class="event">Hilton Head 🌴🐚</span></div>
-    <div class="day"></div>
-
-    <div class="day"></div><div class="day"></div><div class="day"></div><div class="day"></div><div class="day"></div><div class="day"></div><div class="day"></div>
-  </div>
-</div>
-
-<!-- ADD EVENT -->  
-<div class="container">
-
-  <h3>Add Event</h3>
-
-<label>Start Date</label>
-<input id="startDate" type="date" />
-
-<label>End Date (optional)</label>
-<input id="endDate" type="date" />
-
-<input id="event" type="text" placeholder="Event name" />
-<input id="emoji" type="text" placeholder="Emoji (🌊)" maxlength="2" />
-
-<button onclick="addEvent()">Add Event</button>
-
-  <hr />
-
-  <div id="events"></div>
+  <h2 class="month-title">🌴 August 2026</h2>
+  <div id="august" class="calendar-grid"></div>
 
 </div>
-  
-</div>
 
-<!-- Added Important script -->  
 <script>
 const API_URL = "https://sheetdb.io/api/v1/wsm9d4yrb5d23";
 
+const weekdays = [
+  "Sun",
+  "Mon 😎",
+  "Tue",
+  "Wed 🏖️",
+  "Thu",
+  "Fri",
+  "Sat 🥾"
+];
 
-  
-  async function deleteEvent(id) {
-
-  await fetch(`${API_URL}/id/${id}`, {
-
-    method: "DELETE"
-
-  });
-
-  loadEvents();
-
-}
-
-  
-  
-async function loadEvents() {
-  try {
-    const res = await fetch(API_URL);
-    const data = await res.json();
-
-    const container = document.getElementById("events");
-    container.innerHTML = "";
-
-    data.forEach(item => {
-      const div = document.createElement("div");
-
-      div.style.background = "white";
-      div.style.margin = "10px 0";
-      div.style.padding = "12px";
-      div.style.borderRadius = "12px";
-      div.style.boxShadow = "0 2px 6px rgba(0,0,0,0.08)";
-      div.style.fontSize = "14px";
-
-      div.innerHTML = `
-
-  <strong>${item.Date || item.startDate}</strong><br>
-
-  ${item.Emoji || ""} ${item.Event || ""}
-
-  <br>
-
-  <button onclick="deleteEvent(${item.id})">Delete</button>
-
-`;
-
-      container.appendChild(div);
-    });
-
-  } catch (err) {
-    document.getElementById("events").innerHTML =
-      "<p>Failed to load events.</p>";
-    console.error(err);
-  }
-}
-
-loadEvents();
-</script>
-
-<!-- ADD EVENT END -->   
-<script>
-const API_URL = "https://sheetdb.io/api/v1/wsm9d4yrb5d23";
-
-async function loadEvents() {
+async function loadCalendar() {
   const res = await fetch(API_URL);
-  const data = await res.json();
+  const events = await res.json();
 
-  const container = document.getElementById("events");
+  buildMonth("june", 2026, 5, 30, events);
+  buildMonth("july", 2026, 6, 31, events);
+  buildMonth("august", 2026, 7, 31, events);
+}
+
+function buildMonth(containerId, year, monthIndex, daysInMonth, events) {
+  const container = document.getElementById(containerId);
   container.innerHTML = "";
 
-  data.forEach(item => {
-    const div = document.createElement("div");
-
-    div.style.background = "white";
-    div.style.margin = "10px 0";
-    div.style.padding = "12px";
-    div.style.borderRadius = "12px";
-    div.style.boxShadow = "0 2px 6px rgba(0,0,0,0.08)";
-
-   const range =
-  item.startDate || item.StartDate || item.Date;
-
-div.innerHTML = `
-  <strong>${range}</strong><br>
-  ${item.Emoji || item.emoji || ""} ${item.Event || item.event || ""}
-`;
-
-    div.innerHTML = `
-      <strong>${range}</strong><br>
-      ${item.emoji || ""} ${item.event}
-    `;
-
-    container.appendChild(div);
+  weekdays.forEach(day => {
+    const header = document.createElement("div");
+    header.className = "weekday";
+    header.innerText = day;
+    container.appendChild(header);
   });
+
+  const firstDay = new Date(year, monthIndex, 1).getDay();
+
+  for (let i = 0; i < firstDay; i++) {
+    const blank = document.createElement("div");
+    container.appendChild(blank);
+  }
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    const cell = document.createElement("div");
+    cell.className = "day-cell";
+
+    const number = document.createElement("div");
+    number.className = "day-number";
+    number.innerText = day;
+    cell.appendChild(number);
+
+    const currentDate = `${year}-${String(monthIndex + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+
+    events.forEach(event => {
+      const start = event.startDate || event.StartDate || event.Date;
+      const end = event.endDate || event.EndDate || start;
+
+      if (currentDate >= start && currentDate <= end) {
+        const pill = document.createElement("div");
+        pill.className = "event-pill";
+
+        pill.innerText = `${event.emoji || event.Emoji || ''} ${event.event || event.Event || ''}`;
+
+        cell.appendChild(pill);
+      }
+    });
+
+    container.appendChild(cell);
+  }
 }
 
 async function addEvent() {
   const startDate = document.getElementById("startDate").value;
-  const endDate = document.getElementById("endDate").value;
+  const endDate = document.getElementById("endDate").value || startDate;
   const event = document.getElementById("event").value;
   const emoji = document.getElementById("emoji").value;
 
   if (!startDate || !event) {
-    alert("Start date + event required");
+    alert("Please enter a date and event");
     return;
   }
 
@@ -310,14 +250,14 @@ async function addEvent() {
     data: [
       {
         startDate,
-        endDate: endDate || startDate,
+        endDate,
         event,
         emoji
       }
     ]
   };
 
-  const res = await fetch(API_URL, {
+  const response = await fetch(API_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -325,8 +265,8 @@ async function addEvent() {
     body: JSON.stringify(payload)
   });
 
-  if (!res.ok) {
-    alert("Failed to add event (check SheetDB POST permissions)");
+  if (!response.ok) {
+    alert("Failed to add event. Check SheetDB permissions.");
     return;
   }
 
@@ -335,11 +275,11 @@ async function addEvent() {
   document.getElementById("event").value = "";
   document.getElementById("emoji").value = "";
 
-  loadEvents();
+  loadCalendar();
 }
 
-loadEvents();
+loadCalendar();
 </script>
-  
+
 </body>
 </html>
