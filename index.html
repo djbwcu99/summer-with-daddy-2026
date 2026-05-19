@@ -225,6 +225,24 @@ function buildMonth(containerId, year, monthIndex, daysInMonth, events) {
         const pill = document.createElement("div");
         pill.className = "event-pill";
 
+const color = event.color || "yellow";
+
+const colors = {
+
+  blue: "#bde0fe",
+
+  green: "#caffbf",
+
+  red: "#ffadad",
+
+  yellow: "#fff1b8",
+
+  purple: "#d0bdf4"
+
+};
+
+pill.style.background = colors[color] || "#fff1b8";
+
         pill.innerText = `${event.emoji || event.Emoji || ''} ${event.event || event.Event || ''}`;
 
         cell.appendChild(pill);
