@@ -218,13 +218,16 @@ async function loadEvents() {
       div.style.fontSize = "14px";
 
       div.innerHTML = `
-        <div style="font-weight:600; margin-bottom:4px;">
-          ${item.Date || item.date}
-        </div>
-        <div>
-          ${item.Emoji || item.emoji || ""} ${item.Event || item.event}
-        </div>
-      `;
+
+  <strong>${item.Date || item.startDate}</strong><br>
+
+  ${item.Emoji || ""} ${item.Event || ""}
+
+  <br>
+
+  <button onclick="deleteEvent(${item.id})">Delete</button>
+
+`;
 
       container.appendChild(div);
     });
