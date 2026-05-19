@@ -259,10 +259,13 @@ async function loadEvents() {
     div.style.borderRadius = "12px";
     div.style.boxShadow = "0 2px 6px rgba(0,0,0,0.08)";
 
-    const range =
-      item.startDate === item.endDate || !item.endDate
-        ? item.startDate
-        : `${item.startDate} → ${item.endDate}`;
+   const range =
+  item.startDate || item.StartDate || item.Date;
+
+div.innerHTML = `
+  <strong>${range}</strong><br>
+  ${item.Emoji || item.emoji || ""} ${item.Event || item.event || ""}
+`;
 
     div.innerHTML = `
       <strong>${range}</strong><br>
