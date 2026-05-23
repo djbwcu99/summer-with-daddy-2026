@@ -12,22 +12,38 @@
     background: white !important;
   }
 
-  /* Hide UI elements not needed for printing */
-  .no-print {
+  /* ✅ HIDE EVERYTHING ABOVE CALENDAR (THIS FIXES YOUR MAIN ISSUE) */
+  .no-print,
+  .add-event,
+  form,
+  input,
+  button {
     display: none !important;
   }
 
-  /* Force each month onto its own printed page */
+  /* Keep each month on its own page */
   .month-page {
     page-break-after: always;
+    break-after: page;
   }
 
-  /* Calendar day styling for print */
+  /* Prevent weird splitting inside calendar */
+  .calendar-grid {
+    break-inside: avoid;
+  }
+
+  /* Make days consistent and smaller so it FITS one page */
   .day {
-    min-height: 110px;
+    min-height: 90px;
     border: 1px solid black;
-    padding: 6px;
+    padding: 4px;
+    font-size: 12px;
     white-space: pre-wrap;
+  }
+
+  /* Force full width fit */
+  .calendar-grid {
+    width: 100%;
   }
 }
 </style>
