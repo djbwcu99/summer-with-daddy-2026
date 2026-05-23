@@ -1,49 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <style>
+ <style>
 @media print {
   @page {
     size: landscape;
-    margin: 0.4in;
+    margin: 0.3in;
   }
 
   body {
     background: white !important;
   }
 
-  /* ✅ HIDE EVERYTHING ABOVE CALENDAR (THIS FIXES YOUR MAIN ISSUE) */
-  .no-print,
-  .add-event,
-  form,
-  input,
-  button {
-    display: none !important;
+  /* =========================
+     🚨 HARD HIDE EVERYTHING ABOVE CALENDAR
+     ========================= */
+
+  /* Hide anything that is NOT a month */
+  body * {
+    visibility: hidden !important;
   }
 
-  /* Keep each month on its own page */
+  .month-page,
+  .month-page * {
+    visibility: visible !important;
+  }
+
   .month-page {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
     page-break-after: always;
-    break-after: page;
   }
 
-  /* Prevent weird splitting inside calendar */
+  .month-page:not(:first-of-type) {
+    page-break-before: always;
+  }
+
+  /* =========================
+     CALENDAR FIT FIX
+     ========================= */
+
   .calendar-grid {
-    break-inside: avoid;
+    width: 100% !important;
+    transform: scale(0.92);
+    transform-origin: top left;
   }
 
-  /* Make days consistent and smaller so it FITS one page */
   .day {
-    min-height: 90px;
+    min-height: 80px;
     border: 1px solid black;
     padding: 4px;
-    font-size: 12px;
+    font-size: 11px;
     white-space: pre-wrap;
   }
 
-  /* Force full width fit */
-  .calendar-grid {
-    width: 100%;
+  /* kill anything outside calendar */
+  header, nav, form, input, button, .no-print {
+    display: none !important;
   }
 }
 </style>
