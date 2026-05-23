@@ -1,6 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <style>
+@media print {
+  @page {
+    size: landscape;
+    margin: 0.4in;
+  }
+
+  body {
+    background: white !important;
+  }
+
+  /* Hide UI elements not needed for printing */
+  .no-print {
+    display: none !important;
+  }
+
+  /* Force each month onto its own printed page */
+  .month-page {
+    page-break-after: always;
+  }
+
+  /* Calendar day styling for print */
+  .day {
+    min-height: 110px;
+    border: 1px solid black;
+    padding: 6px;
+    white-space: pre-wrap;
+  }
+}
+</style>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Summer With Daddy 2026</title>
